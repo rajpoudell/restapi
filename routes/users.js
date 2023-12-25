@@ -31,5 +31,11 @@ router.delete('/:id' , (req,res) => {
     res.send(`user with the id ${id} deleted from the datebase`)
 })
 
+router.patch('/:id',(req,res) =>{
+    const { id } = req.params;
+    const user = users.find((user) => user.id === id);
+
+})
+
 
 export default router;
