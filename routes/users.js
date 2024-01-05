@@ -1,41 +1,21 @@
 import express  from "express";
-import { v4 as uuidv4 } from 'uuid';
+import { createUser,getUsers, getUser,deleteUser,updateUser } from "../controllers/users.js";
 
 const router  = express.Router();
 
 
-let users = [];                  
+              
 
 //all routes in here are starting with /users
-router.get('/', (req,res) => {
-    res.send(users)   
-});
+router.get('/', getUsers);
 
-router.post('/', (req, res) =>{
-    const user  = req.body //post req on postman wala nabin pandey  
- 
-    users.push({ ...user, id:  uuidv4() }) ;
+router.post('/', createUser);
 
-    res.send(`User with the name ${user.firstName} added to the datebase !`);
-});
+router.get('/:id' ,getUser)
 
-router.get('/:id' , (req,res)  => {
-    const {id}  = req.params;
-    const foundUser = users.find( (user) => user.id===id);
-    res.send( foundUser)
-})
+router.delete('/:id' , deleteUser)
 
-router.delete('/:id' , (req,res) => {
-    const {id}  = req.params;
-    users = users.filter((user) => user.id !== id)
-    res.send(`user with the id ${id} deleted from the datebase`)
-})
-
-router.patch('/:id',(req,res) =>{
-    const { id } = req.params;
-    const user = users.find((user) => user.id === id);
-
-})
+router.patch('/:id',updateUser)
 
 
 export default router;
