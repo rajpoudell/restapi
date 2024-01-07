@@ -7,6 +7,7 @@ export const getUsers = ((req,res) =>{
 })
 
 
+
 export const createUser = (req, res) => {
     const user = req.body;
   
